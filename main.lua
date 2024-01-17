@@ -1,3 +1,11 @@
+io.stdout:setvbuf("no")
+
+function normalize(val, min, max)
+    return (val - min) / (max - min)
+end
+
+print(normalize(-20, -40, 40))
+
 function love.load()
     Object = require "classic"
     require "player"
