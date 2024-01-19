@@ -4,7 +4,9 @@ function normalize(val, min, max)
     return (val - min) / (max - min)
 end
 
-print(normalize(-20, -40, 40))
+function rsign() 
+    return love.math.random(2) == 2 and 1 or -1 
+end
 
 function love.load()
     Object = require "classic"
@@ -13,6 +15,8 @@ function love.load()
     require "ball"
     require "wall"
     
+    playerScore = 0
+    enemyScore = 0
     window_width = love.graphics.getWidth()
     window_height = love.graphics.getHeight()
     
@@ -35,6 +39,15 @@ function love.update(dt)
     
     ball:checkCollision(player)
     ball:checkCollision(enemy)
+    
+    if ball.x < 0 then
+        enemyScore = enemyScore + 1
+        ball:reset()
+    elseif ball.x > window_width then
+        playerScore = playerScore + 1
+        ball:reset()
+    end
+    
 end
 
 function love.draw()
@@ -44,4 +57,9 @@ function love.draw()
 
     ceiling:draw()
     floor:draw()
+    
+    love.graphics.print('Score: ' .. playerScore, 20, 20, 0, 2, 2)
+    love.graphics.print('Score: ' .. enemyScore, window_width - 120, 20, 0, 2, 2)
 end
+
+

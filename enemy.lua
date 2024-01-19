@@ -5,7 +5,7 @@ function Enemy:new()
     self.x = window_width - 30
     self.y = 250
     self.width = 10
-    self.height = 70
+    self.height = 80
     self.speed = 500
 end
 
