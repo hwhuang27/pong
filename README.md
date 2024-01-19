@@ -1,2 +1,2 @@
 # Pong
-Pong recreated in Lua with the [LOVE](https://love2d.org/) framework. 
+Pong made in Lua with the [LÖVE](https://love2d.org/) framework. 
