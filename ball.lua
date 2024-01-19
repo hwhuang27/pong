@@ -109,10 +109,10 @@ function Ball:checkCollision(obj)
 
             -- change ball direction and cap max at 800
             self.speed = -self.speed * 1.1
-            if self.speed > 800 then
-                self.speed = 800
-            elseif self.speed < -800 then
-                self.speed = -800
+            if self.speed > 900 then
+                self.speed = 900
+            elseif self.speed < -900 then
+                self.speed = -900
             end
             
     end

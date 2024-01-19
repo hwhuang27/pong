@@ -31,7 +31,7 @@ end
 
 function love.update(dt)
     player:update(dt)
-    enemy:update(dt)
+    enemy:update(dt, ball)
     ball:update(dt)
     
     ball:checkWallCollision(ceiling)
@@ -47,14 +47,13 @@ function love.update(dt)
         playerScore = playerScore + 1
         ball:reset()
     end
-    
 end
 
 function love.draw()
     player:draw()
     enemy:draw()
     ball:draw()
-
+    
     ceiling:draw()
     floor:draw()
     

@@ -6,14 +6,23 @@ function Enemy:new()
     self.y = 250
     self.width = 10
     self.height = 80
-    self.speed = 500
+    self.speed = 420
 end
 
-function Enemy:update(dt)
-    if love.keyboard.isDown("up") then
+function Enemy:update(dt, ball)
+--    if love.keyboard.isDown("up") then
+--        self.y = self.y - self.speed * dt
+--    elseif love.keyboard.isDown("down") then
+--        self.y = self.y + self.speed * dt
+--    end
+    
+    local center = self.y + (self.height/2)
+    if(center - 4 > ball.y) then
         self.y = self.y - self.speed * dt
-    elseif love.keyboard.isDown("down") then
+    elseif (center + 4 < ball.y) then
         self.y = self.y + self.speed * dt
+    else
+        self.y = self.y
     end
     
     if self.y < 10 then
