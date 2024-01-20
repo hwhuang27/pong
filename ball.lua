@@ -22,12 +22,12 @@ function Ball:draw()
     love.graphics.rectangle("fill", self.x, self.y, self.size, self.size)
 end
 
-function Ball:reset(playerScore)
+function Ball:reset()
     local width = love.graphics.getWidth()
     local height = love.graphics.getHeight()
     self.x = width/2
     self.y = love.math.random(height/2 - 50, height/2 + 50)
-    self.speed = 300 + (playerScore * 20)
+    self.speed = 300 + 15
     self.cos = (0.866 + (love.math.random(1, 134)/1000)) * rsign()
     self.sin = -0.5 + (love.math.random(1, 100)/100)
 end

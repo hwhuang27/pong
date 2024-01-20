@@ -20,9 +20,9 @@ function love.load()
     enemy = Enemy()
     ball = Ball()
     
-    blip = love.audio.newSource("blip.wav", "static")
-    goal = love.audio.newSource("goal.wav", "static")
-    fail = love.audio.newSource("fail.wav", "static")
+    blip = love.audio.newSource("sfx/blip.wav", "static")
+    goal = love.audio.newSource("sfx/goal.wav", "static")
+    fail = love.audio.newSource("sfx/fail.wav", "static")
 end
 
 function love.update(dt)
@@ -38,14 +38,14 @@ function love.update(dt)
     
     if ball.x < 0 then
         enemyScore = enemyScore + 1
-        ball:reset(playerScore)
         enemy:decreaseSpeed()
         fail:play()
+        ball:reset()
     elseif ball.x > window_width then
         playerScore = playerScore + 1
-        ball:reset(playerScore)
         enemy:increaseSpeed()
         goal:play()
+        ball:reset()
     end
 end
 
