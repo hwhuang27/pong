@@ -22,15 +22,16 @@ function Ball:draw()
     love.graphics.rectangle("fill", self.x, self.y, self.size, self.size)
 end
 
-function Ball:reset()
+function Ball:reset(playerScore)
     local width = love.graphics.getWidth()
     local height = love.graphics.getHeight()
     self.x = width/2
     self.y = love.math.random(height/2 - 50, height/2 + 50)
-    self.speed = 300
+    self.speed = 300 + (playerScore * 20)
     self.cos = (0.866 + (love.math.random(1, 134)/1000)) * rsign()
     self.sin = -0.5 + (love.math.random(1, 100)/100)
 end
+
 
 function Ball:checkWallCollision(obj)
     local self_left = self.x
@@ -58,6 +59,8 @@ function Ball:checkWallCollision(obj)
             
             -- invert sin to bounce off walls
             self.sin = -self.sin
+            
+            blip:play()
     end
 end
 
@@ -109,12 +112,13 @@ function Ball:checkCollision(obj)
 
             -- change ball direction and cap max at 800
             self.speed = -self.speed * 1.1
-            if self.speed > 900 then
-                self.speed = 900
-            elseif self.speed < -900 then
-                self.speed = -900
+            if self.speed > 1000 then
+                self.speed = 1000
+            elseif self.speed < -1000 then
+                self.speed = -1000
             end
             
+            blip:play()
     end
 end
 

@@ -9,9 +9,9 @@ function Player:new()
 end
 
 function Player:update(dt)
-    if love.keyboard.isDown("w") then
+    if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
         self.y = self.y - self.speed * dt
-    elseif love.keyboard.isDown("s") then
+    elseif love.keyboard.isDown("s") or love.keyboard.isDown("down") then
         self.y = self.y + self.speed * dt
     end
     

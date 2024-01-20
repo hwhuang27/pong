@@ -1,12 +1,6 @@
 io.stdout:setvbuf("no")
 
-function normalize(val, min, max)
-    return (val - min) / (max - min)
-end
-
-function rsign() 
-    return love.math.random(2) == 2 and 1 or -1 
-end
+require "utility"
 
 function love.load()
     Object = require "classic"
@@ -15,18 +9,20 @@ function love.load()
     require "ball"
     require "wall"
     
-    playerScore = 0
-    enemyScore = 0
     window_width = love.graphics.getWidth()
     window_height = love.graphics.getHeight()
+    playerScore = 0
+    enemyScore = 0
     
+    ceiling = Wall(0, 0)
+    floor = Wall(0, window_height - 10)
     player = Player()
     enemy = Enemy()
     ball = Ball()
     
-    ceiling = Wall(0, 0)
-    floor = Wall(0, window_height - 10)
-    
+    blip = love.audio.newSource("blip.wav", "static")
+    goal = love.audio.newSource("goal.wav", "static")
+    fail = love.audio.newSource("fail.wav", "static")
 end
 
 function love.update(dt)
@@ -42,10 +38,14 @@ function love.update(dt)
     
     if ball.x < 0 then
         enemyScore = enemyScore + 1
-        ball:reset()
+        ball:reset(playerScore)
+        enemy:decreaseSpeed()
+        fail:play()
     elseif ball.x > window_width then
         playerScore = playerScore + 1
-        ball:reset()
+        ball:reset(playerScore)
+        enemy:increaseSpeed()
+        goal:play()
     end
 end
 

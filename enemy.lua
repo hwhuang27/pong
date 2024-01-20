@@ -6,7 +6,15 @@ function Enemy:new()
     self.y = 250
     self.width = 10
     self.height = 80
-    self.speed = 430
+    self.speed = 300
+end
+
+function Enemy:increaseSpeed()
+    self.speed = self.speed + 20
+end
+
+function Enemy:decreaseSpeed()
+    self.speed = self.speed - 5
 end
 
 function Enemy:update(dt, ball)
